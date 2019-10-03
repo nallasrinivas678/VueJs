@@ -1,0 +1,85 @@
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://unpkg.com/vue-select@latest"></script>
+        <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
+    <title> 
+        This is Vue Demo
+    </title> 
+</head> 
+  
+<body>
+    <h2 style="text-align: center">This is Vue Demo</h2>
+    <div class="panel panel default">
+            <div class="panel-body">
+                    <div id="reg1">
+                            <div class="row container">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                          <div class="form-group">
+                                                  <label>First Name: {{firstname}}</label>
+                                                  <input type="text"  name="firstname" class="form-control" v-model="firstname"><br>
+                                          </div>
+                                          <div class="form-group">
+                                                  <label>Last Name: {{lastname}}</label>
+                                                  <input type="text" class="form-control" name="lastname" v-model="lastname"><br>
+                                          </div>
+                                          <div class="form-group">
+                                                <label>Full Name: {{name}}</label>
+                                          </div>
+
+                                          <div class="form-group">
+                                                <!-- <select name="ResdidencyType" v-model="selectedValue">
+                                                    <option v-for="item in options" :value="item.id">{{item.value}}</option>
+                                                </select> -->
+                                                <label>Type of Residency</label>
+                                                <v-select label="value" :options="options" v-model="optionSelected"></v-select>
+                                                <span v-if="optionSelected">You selected : {{optionSelected ? optionSelected.value:''}}  as your Residency</span>
+                                          </div>
+                                          <button v-on:click="getDetails" type="button" id="btnDetails" class="btn btn-primary">Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    
+                                </div>
+                            </div>
+                        </div>
+            </div>
+    </div>
+     
+      <script>
+Vue.component('v-select', VueSelect.VueSelect)
+
+
+
+          const reg1 = new Vue({
+            el:'#reg1',
+            data:{
+                firstname:'Sriivas',
+                lastname:'Nalla',
+                optionSelected:null,
+                options:[ 
+                    {key:1, value:'Rent'},
+                 {key:1, value:'Mortage'}, 
+                 {key:1, value:'Own'},
+                 {key:1, value:'Lease'},]
+            },
+            computed: {
+                name: function(){
+                    return this.firstname+' '+this.lastname;
+                }
+            },
+            methods:{
+                getDetails: function(){
+                    alert('Firts Name'+this.firstname+' Last Name:'+this.lastname+'Full Name'+this.name+'Residency Type:'+ this.optionSelected.value);
+                }
+            }
+          });
+      </script>
+</body>
+</html>
